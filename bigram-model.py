@@ -1,7 +1,7 @@
 import math
 
 
-class Bigram:
+class BigramModel:
 
     def __init__(self):
         self.word2count = {}
@@ -12,6 +12,7 @@ class Bigram:
     def addWord(self, word):
         if not word in self.word2count:
             self.word2count[word] = 0
+            self.totalWordCount += 1
         else:
             self.word2count[word] += 1
 
@@ -23,7 +24,6 @@ class Bigram:
             else:
                 self.bigrams2count[bigram] += 1
 
-        self.totalWordCount += 1
         self.lastWord = word
 
     def getWordCount(self, word):
@@ -55,8 +55,9 @@ class Bigram:
         return (1.0 / self.totalWordCount) * (probability)
 
 
-b = Bigram()
+b = BigramModel()
 b.addSentence("The quick brown fox jumps over the lazy dog")
+
 print()
 print(b.propability("The quick brown fox jumps over the lazy dog"))
 print(b.propability("The quick brown fox jumps over the lazy turtle"))
